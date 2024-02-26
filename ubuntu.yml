@@ -41,6 +41,7 @@
           - wireshark          
           - keepassx          
           - telegram-desktop
+          - terminator  
 
     - block:
       - name: Verify if Oh-My-zsh is installed
@@ -257,6 +258,12 @@
         apt:
           deb: https://discord.com/api/download?platform=linux&format=deb
 
+      - name: Install Slack Desktop
+        become: true        
+        community.general.snap:
+          name: 'slack'
+          classic: yes
+          
       - name: Install eksctl        
         shell: |
           curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
