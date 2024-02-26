@@ -3,14 +3,14 @@
 This repository contains scripts to automate and speedup the workflow and preparation for my machine.
 
 > **_Disclaimer_** :  
-> Those scripts are ubuntu related with major version 18+, for other distributions you'll need to adapt it
+> Those scripts are ubuntu related with major version 20+, for other distributions you'll need to adapt it
 ___
 
 ## Prepare Workstation
 
 > Read the `ubuntu.yml` file before applying and be sure to understand everything that will be done.
 
-1. Install Ansible
+1. Install Ansible, Unzip and Git...
 ```bash
 sudo apt update && sudo apt install ansible unzip git -y
 ```
