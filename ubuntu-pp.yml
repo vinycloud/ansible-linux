@@ -244,7 +244,12 @@
       - name: Install Open-Lens
         become: true
         apt:  
-          deb: https://github.com/MuhammedKalkan/OpenLens/releases/download/v6.5.2-366/OpenLens-6.5.2-366.amd64.deb      
+          deb: https://github.com/MuhammedKalkan/OpenLens/releases/download/v6.5.2-366/OpenLens-6.5.2-366.amd64.deb
+
+      - name: Install Drawio...
+        become: true
+        apt:  
+          deb: https://github.com/jgraph/drawio-desktop/releases/download/v24.1.0/drawio-amd64-24.1.0.deb    
           
       - name: Install eksctl        
         shell: |
