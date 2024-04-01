@@ -238,7 +238,17 @@
       - name: Install Open-Lens
         become: true
         apt:  
-          deb: https://github.com/MuhammedKalkan/OpenLens/releases/download/v6.5.2-366/OpenLens-6.5.2-366.amd64.deb      
+          deb: https://github.com/MuhammedKalkan/OpenLens/releases/download/v6.5.2-366/OpenLens-6.5.2-366.amd64.deb
+
+      - name: Install Drawio...
+        become: true
+        apt:  
+          deb: https://github.com/jgraph/drawio-desktop/releases/download/v24.1.0/drawio-amd64-24.1.0.deb 
+
+      - name: Install flameshot 0.8.0...
+        become: true
+        apt:
+          deb: https://github.com/flameshot-org/flameshot/releases/download/v0.8.0/flameshot_ubuntu_0.8.0-1_amd64.deb
           
       - name: Install eksctl        
         shell: |
@@ -273,8 +283,8 @@
           dest: "/usr/local/bin/eks-node-viewer"
           mode: 755                     
 
-    - name: Install Spotify...
-      become: true        
-      community.general.snap:
-        name: 'spotify'
-        classic: yes
+      - name: Install Spotify...
+        become: true        
+        community.general.snap:
+          name: 'spotify'
+          classic: yes
