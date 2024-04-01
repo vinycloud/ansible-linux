@@ -4,10 +4,10 @@
   connection: local
   tasks:
 
-    - name: Run apt update before start de tasks....
+    - name: Run apt update before start tasks....
       become: true
       ansible.builtin.apt:
-      update_cache: yes
+        update_cache: yes
 
     - name: Installing Linux Apps
       become: true
@@ -54,13 +54,7 @@
         shell:
           cmd: 'curl -fsL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash'
           warn: false
-        when: ohmyzsh.rc != 0
-
-      - name: Changing Default Shell to ZSH
-        become: yes
-        user: 
-          name: '{{ ansible_user_id }}'
-          shell: /bin/zsh 
+        when: ohmyzsh.rc != 0       
 
       - name: Changing Default ZSH Theme to Bira
         lineinfile:
@@ -279,8 +273,8 @@
           dest: "/usr/local/bin/eks-node-viewer"
           mode: 755                     
 
-      - name: Install Spotify...
-        become: true        
-        community.general.snap:
-          name: 'spotify'
-          classic: yes
+    - name: Install Spotify...
+      become: true        
+      community.general.snap:
+        name: 'spotify'
+        classic: yes
