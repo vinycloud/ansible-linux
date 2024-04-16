@@ -282,6 +282,11 @@
         apt:
           deb: https://discord.com/api/download?platform=linux&format=deb
 
+      - name: Install Epson L355 drivers....
+        become: true
+        apt:
+          deb: https://download.ebz.epson.net/dsc/du/02/DriverDownloadInfo.do?LG2=JA&CN2=US&CTI=177&PRN=Linux%20deb%2064bit%20package&OSC=LX&DL    
+
       - name: Install Slack Desktop
         become: true        
         community.general.snap:
