@@ -29,8 +29,7 @@
           - git
           - bash-completion
           - gnupg-agent
-          - zsh
-          - flameshot
+          - zsh          
           - fonts-hack
           - tilix
           - virtualbox
@@ -275,7 +274,12 @@
       - name: Install Drawio...
         become: true
         apt:  
-          deb: https://github.com/jgraph/drawio-desktop/releases/download/v24.1.0/drawio-amd64-24.1.0.deb        
+          deb: https://github.com/jgraph/drawio-desktop/releases/download/v24.7.17/drawio-amd64-24.7.17.deb  
+
+      - name: Install flameshot 0.8.0...
+        become: true
+        apt:
+          deb: https://github.com/flameshot-org/flameshot/releases/download/v0.8.0/flameshot_ubuntu_0.8.0-1_amd64.deb    
 
       - name: Install Discord
         become: true
