@@ -225,10 +225,10 @@
           line: 'plugins=(git docker docker-compose)'
         
     - block:
-      - name: Installing Kubectl 1.29.1
+      - name: Installing Kubectl 1.31
         become: true
         get_url:    
-          url: 'https://dl.k8s.io/release/v1.29.1/bin/linux/amd64/kubectl'
+          url: 'https://dl.k8s.io/release/v1.31.0/bin/linux/amd64/kubectl'
           dest: /usr/local/bin/kubectl
           mode: 755
 
@@ -297,7 +297,14 @@
         shell: |
           curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
           sudo mv /tmp/eksctl /usr/local/bin
-          eksctl version  
+          eksctl version
+
+      - name: Install awscli-v2       
+        shell: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          sudo unzip awscliv2.zip
+          sudo ./aws/install   
+          aws --version
 
       - name: Executar comando curl e salvar o script helm
         command: curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3        
