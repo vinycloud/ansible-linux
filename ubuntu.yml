@@ -47,7 +47,7 @@
           - telegram-desktop
           - terminator 
           - snapd         
-           
+          - gnome-shell-extensions
 
     - block:
       - name: Download EKS-Node-Viewer binary...
@@ -84,7 +84,7 @@
         lineinfile:
           path: /home/{{ ansible_user_id }}/.zshrc
           regexp: '^ZSH_THEME='
-          line: 'ZSH_THEME="bira"'
+          line: 'ZSH_THEME="xiong-chiamiov-plus"'
 
       - name: Creating ZSH Completion folder
         file:
@@ -304,6 +304,11 @@
           sudo mv /tmp/eksctl /usr/local/bin
           eksctl version
 
+      - name: Install Fuzzy Finder (fzf)     
+        shell: |
+          git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+          ~/.fzf/install
+          
       - name: Install awscli-v2       
         shell: |
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
