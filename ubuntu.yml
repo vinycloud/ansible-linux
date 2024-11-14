@@ -48,6 +48,7 @@
           - terminator 
           - snapd         
           - gnome-shell-extensions
+          - libarchive-tools
 
     - block:
       - name: Download EKS-Node-Viewer binary...
