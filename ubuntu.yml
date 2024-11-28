@@ -80,7 +80,7 @@
           name: '{{ ansible_user_id }}'
           shell: /bin/zsh 
 
-      - name: Changing Default ZSH Theme to Bira
+      - name: Changing Default ZSH Theme
         lineinfile:
           path: /home/{{ ansible_user_id }}/.zshrc
           regexp: '^ZSH_THEME='
