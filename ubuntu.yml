@@ -19,6 +19,7 @@
           - vim
           - htop
           - curl
+          - fuse
           - wget
           - ncdu
           - tree
