@@ -17,6 +17,7 @@
         state: present
       loop:
           - vim
+          - nvidia-driver-460
           - htop
           - curl
           - fuse
@@ -219,11 +220,11 @@
           url: 'https://raw.githubusercontent.com/docker/compose/1.26.2/contrib/completion/bash/docker-compose'
           dest: '/etc/bash_completion.d/docker-compose'
 
-      - name: Install Docker-Compose and Docker Machine Zsh Completion
+      - name: Adding plugins in ZSHRC...
         lineinfile:
           path: /home/{{ ansible_user_id }}/.zshrc
           regexp: '^plugins='
-          line: 'plugins=(git docker docker-compose)'
+          line: 'plugins=(git docker docker-compose terraform sudo kubectl kube-ps1 zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search kubectl-autocomplete)'
         
     - block:
       - name: Installing Kubectl 1.31
