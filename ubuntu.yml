@@ -50,6 +50,8 @@
           - snapd         
           - gnome-shell-extensions
           - libarchive-tools
+          - netcat
+          - nmap
 
     - block:
       - name: Download EKS-Node-Viewer binary...
