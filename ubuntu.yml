@@ -34,7 +34,6 @@
           - zsh          
           - fonts-hack
           - tilix          
-          - mlocate
           - krita
           - jq
           - mtr
@@ -43,13 +42,10 @@
           - gnome-tweaks
           - calibre
           - wireshark          
-          - keepassx          
-          - telegram-desktop
           - terminator 
           - snapd         
           - gnome-shell-extensions
           - libarchive-tools
-          - netcat
           - nmap
 
     - block:
@@ -102,16 +98,22 @@
           state: present
       
     - block:
+      - name: Download Google Key
+        become: true
+        get_url:
+          url: 'https://dl.google.com/linux/linux_signing_key.pub'
+          dest: /tmp/google-chrome.pub
+
       - name: Install Google Key
         become: true
-        apt_key: 
-          url: 'https://dl.google.com/linux/linux_signing_key.pub'
-          state: present
+        shell:
+          cmd: gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg /tmp/google-chrome.pub
+          creates: /usr/share/keyrings/google-chrome.gpg
 
       - name: Install Google Repository
         become: true
         apt_repository:
-          repo: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
+          repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main'
           state: present
           filename: google-chrome
 
@@ -137,16 +139,22 @@
           remote_src: yes       
              
     - block:
+      - name: Download Microsoft Key
+        become: true
+        get_url:
+          url: 'https://packages.microsoft.com/keys/microsoft.asc'
+          dest: /tmp/microsoft.asc
+
       - name: Install Microsoft Key
         become: true
-        apt_key:
-          url: 'https://packages.microsoft.com/keys/microsoft.asc'
-          state: present
+        shell:
+          cmd: gpg --dearmor -o /usr/share/keyrings/microsoft.gpg /tmp/microsoft.asc
+          creates: /usr/share/keyrings/microsoft.gpg
 
       - name: Install VSCode Repository
         become: true
         apt_repository:
-          repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main'
+          repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main'
           state: present
           filename: vscode
 
@@ -172,16 +180,22 @@
           - vscode-icons-team.vscode-icons
 
     - block: 
+      - name: Download Docker Key
+        become: true
+        get_url:
+          url: 'https://download.docker.com/linux/ubuntu/gpg'
+          dest: /tmp/docker.gpg
+
       - name: Install Docker Key
         become: true
-        apt_key:
-          url: 'https://download.docker.com/linux/ubuntu/gpg'
-          state: present
+        shell:
+          cmd: gpg --dearmor -o /usr/share/keyrings/docker-ce.gpg /tmp/docker.gpg
+          creates: /usr/share/keyrings/docker-ce.gpg
 
       - name: Install Docker Repository
         become: true
         apt_repository:
-          repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+          repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker-ce.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
           state: present
           filename: docker-ce
           
