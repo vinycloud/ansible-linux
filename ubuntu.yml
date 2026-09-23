@@ -17,7 +17,6 @@
         state: present
       loop:
           - vim
-          - nvidia-driver-460
           - htop
           - curl
           - fuse
@@ -57,7 +56,7 @@
       - name: Download EKS-Node-Viewer binary...
         become: true
         get_url:
-          url: "https://github.com/awslabs/eks-node-viewer/releases/download/v0.6.0/eks-node-viewer_Linux_x86_64"
+          url: "https://github.com/awslabs/eks-node-viewer/releases/download/v0.7.4/eks-node-viewer_Linux_x86_64"
           dest: "/usr/local/bin/eks-node-viewer"
           mode: 755                     
 
@@ -88,7 +87,7 @@
         lineinfile:
           path: /home/{{ ansible_user_id }}/.zshrc
           regexp: '^ZSH_THEME='
-          line: 'ZSH_THEME="xiong-chiamiov-plus"'
+          line: 'ZSH_THEME="cloud"'
 
       - name: Creating ZSH Completion folder
         file:
@@ -125,15 +124,15 @@
       - name: Installing Vagrant...
         become: true
         unarchive:
-          src: 'https://releases.hashicorp.com/vagrant/2.4.3/vagrant_2.4.3_linux_amd64.zip'
+          src: 'https://releases.hashicorp.com/vagrant/2.4.9/vagrant_2.4.9_linux_amd64.zip'
           dest: /usr/local/bin
           remote_src: yes
 
     - block:
-      - name: Installing Terraform 1.7.2
+      - name: Installing Terraform 1.16.X
         become: true
         unarchive:
-          src: 'https://releases.hashicorp.com/terraform/1.7.2/terraform_1.7.2_linux_amd64.zip'
+          src: 'https://releases.hashicorp.com/terraform/1.16.4/terraform_1.16.4_linux_amd64.zip'
           dest: /usr/local/bin
           remote_src: yes       
              
@@ -168,13 +167,8 @@
           - njpwerner.autodocstring
           - eamodio.gitlens
           - amazonwebservices.aws-toolkit-vscode    
-          - codeium.codeium
           - dracula-theme.theme-dracula   
-          - infracost.infracost
           - ms-ceintl.vscode-language-pack-pt-br
-          - golang.go
-          - ms-kubernetes-tools.kind-vscode
-          - ms-kubernetes-tools.vscode-kubernetes-tools
           - vscode-icons-team.vscode-icons
 
     - block: 
@@ -206,7 +200,7 @@
       - name: Install Docker-Compose
         become: true
         get_url:
-          url: 'https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-x86_64'
+          url: 'https://github.com/docker/compose/releases/download/v5.5.1/docker-compose-linux-x86_64'
           dest: '/usr/local/bin/docker-compose'
           mode: 755
 
@@ -229,10 +223,10 @@
           line: 'plugins=(git docker docker-compose terraform sudo kubectl kube-ps1 zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search kubectl-autocomplete)'
         
     - block:
-      - name: Installing Kubectl 1.31
+      - name: Installing Kubectl 1.37
         become: true
         get_url:    
-          url: 'https://dl.k8s.io/release/v1.31.0/bin/linux/amd64/kubectl'
+          url: 'https://dl.k8s.io/release/v1.37.0/bin/linux/amd64/kubectl'
           dest: /usr/local/bin/kubectl
           mode: 755
 
@@ -250,22 +244,12 @@
           state: link
         with_items:
           - kubectx
-          - kubens   
-          
-      - name: Install VirtualBox 7.0
-        become: true
-        apt:
-          deb: https://download.virtualbox.org/virtualbox/7.0.22/virtualbox-7.0_7.0.22-165102~Ubuntu~jammy_amd64.deb
-
-      - name: Install Open-Lens
-        become: true
-        apt:  
-          deb: https://github.com/MuhammedKalkan/OpenLens/releases/download/v6.5.2-366/OpenLens-6.5.2-366.amd64.deb
+          - kubens
   
       - name: Install Drawio...
         become: true
         apt:  
-          deb: https://github.com/jgraph/drawio-desktop/releases/download/v24.7.17/drawio-amd64-24.7.17.deb  
+          deb: https://github.com/jgraph/drawio-desktop/releases/download/v31.4.5/drawio-amd64-31.4.5.deb  
 
       - name: Install flameshot 0.8.0...
         become: true
